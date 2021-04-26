@@ -1,7 +1,7 @@
 %h3= @oven.name
 
 .cookie-info
-  - if @oven.cookie
+  - if @oven.cookies.count > 0
     = render_async check_oven_path(@oven), interval: 30000 
   - else
     Cookie in oven: None

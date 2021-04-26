@@ -4,10 +4,11 @@
   .row
     .small-8.columns
       = f.label :fillings
+      = f.text_field :fillings
   .row
     .small-8.columns
-      = f.text_field :fillings
-
+      = f.label "How many?"
+      = number_field_tag 'quantity', 1, min: 1, max: 20
   .row
     .small-8.columns
       = f.submit 'Mix and bake', class: 'button'

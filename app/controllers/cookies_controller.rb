@@ -3,19 +3,22 @@ class CookiesController < ApplicationController
 
   def new
     @oven = current_user.ovens.find_by!(id: params[:oven_id])
-    if @oven.cookie
+    if @oven.cookies.count > 0
       redirect_to @oven, alert: 'A cookie is already in the oven!'
     else
-      @cookie = @oven.build_cookie
+      @cookie = @oven.cookies.build
     end
   end
 
   def create
     @oven = current_user.ovens.find_by!(id: params[:oven_id])
-    @cookie = @oven.create_cookie!(cookie_params)
-    #Background worker to perform baking cookie by update
-    #status column when cookie is ready.
-    ChefWorker.perform_in(3.minutes, @cookie.id)
+
+    for i in 1..params[:quantity].to_i
+      @cookie = @oven.cookies.create!(cookie_params)
+      # Background worker to perform baking cookie by update
+      # status column when cookie is ready.
+      ChefWorker.perform_in(1.minutes, @cookie.id)
+    end
     redirect_to oven_path(@oven)
   end
 
