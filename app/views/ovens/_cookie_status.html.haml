@@ -1,0 +1,6 @@
+Cookie in oven: 1 cookie with #{@oven.cookie.fillings? ? @oven.cookie.fillings : "no fillings"}
+- if @oven.cookie.ready?
+  (Your Cookie is Ready)
+  = button_to "Retrieve Cookie", empty_oven_path, class: 'button tiny'
+- else
+  %i (Stay put we'll let you know when it's ready)
