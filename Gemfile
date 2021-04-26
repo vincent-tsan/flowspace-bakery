@@ -77,3 +77,7 @@ group :test do
   gem 'rspec_junit_formatter'
   gem 'rails-controller-testing'
 end
+
+gem "sidekiq", "~> 5.2"
+
+gem "render_async", "~> 2.1"
